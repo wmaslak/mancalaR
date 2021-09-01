@@ -1,16 +1,19 @@
+
+
 #' single_sow
 #'
 #' Make a single sowing move, without "compound" sowing
 #'
-#' @param player Player making the move, S for south or N for north
+#' @param player Player making the move, \code{"S"} for south or \code{"N"} for north
 #' @param B_N Board of player N
 #' @param B_S Board of player S
 #' @param pit_r Row of the starting pit
 #' @param pit_c Column of the starting pit
 #' @param direction Direction of sowing, either 1 for clockwise of 0 for
 #'   counter-clockwise
-#' @return Boards of player N and S, ending pit coordinates and boolean
-#'   indicating whether we've ended in an empty pit
+#' @return \code{list(N, S,end_pit_r, end_pit_c, should_end)} Boards of player N
+#'   and S, ending pit coordinates and boolean indicating whether we've ended in
+#'   an empty pit
 
 
 single_sow<- function(player,B_N, B_S, pit_r, pit_c, direction) {
@@ -112,4 +115,110 @@ return(list(N = B_N, S = B_S,
   }
 
 
+#' capture_rule
+#'
+#' Decide if capture is activated at the end of the move
+#'
+#' @param player Player making the move, \code{"S"} for south or \code{"N"} for north
+#' @param B_N Board of player N
+#' @param B_S Board of player S
+#' @param end_pit_r,end_pit_c Row and column of the pit where the sowing ended
+#' @return \code{list(captured = cap, N = B_N, S= B_S, stones_won = st_won)} Boolean indicating if capture took place, boards of player N and S
+#'   after the capture, number of stones captured. If capture did not take place
+#'   it returns \code{FALSE}
 
+capture_rule <- function(player, B_N, B_S, end_pit_r, end_pit_c){
+
+  cap <- FALSE
+  # check if capture will happen
+  if (player == "S") {
+    if((end_pit_r == 1) & (B_N[2,end_pit_c] > 0)){
+      cap <- TRUE
+    }
+  }else{
+    if ((end_pit_r == 2) & (B_S[1,end_pit_c] > 0)){
+      cap <- TRUE
+    }
+  }
+
+
+  if (!cap) { #if capture condition not fulfilled
+    return(cap)
+  }else{
+    if (player == "S") {
+      st_won <- sum(B_N[1:2,end_pit_c])
+      B_N[1:2,end_pit_c] <- c(0,0)
+      B_S[end_pit_r,end_pit_c] <- B_S[end_pit_r,end_pit_c] + st_won
+    }else{
+      st_won <- sum(B_S[1:2,end_pit_c])
+      B_S[1:2,end_pit_c] <- c(0,0)
+      B_N[end_pit_r,end_pit_c] <- B_N[end_pit_r,end_pit_c] + st_won
+    }
+    return(list(captured = cap, N = B_N, S= B_S, stones_won = st_won))
+  }
+
+
+
+
+}
+
+#' find_possible_moves
+#'
+#' Find coordinates of possible starting pits.
+#' You can move from a pit if ic contains at least 2 stones.
+#'
+#'
+#' @param board
+#'
+#' @return Matrix which contains coordinates of possible starting pits.
+#'
+#'
+#' @examples
+find_posssible_moves <- function(board){
+  poss <- which(board > 1,T)
+
+  return(poss)
+}
+
+#' Check if provided move is possible
+#'
+#' @param pit_r
+#' @param pit_c
+#' @param board
+#'
+#' @return
+#'
+#' @examples
+#'
+check_if_move_possible <- function(pit_r,pit_c,board){
+
+  poss_moves <- find_posssible_moves(board)
+  # check if the intended pit is on the list of possible moves
+  is_poss <- any(poss_moves[,1] == pit_r & poss_moves[,2] == pit_c)
+
+  return(is_poss)
+}
+
+#' Encode board from matrix to string
+#'
+#' @param board
+#'
+#' @return
+#'
+#' @examples
+encode_board <- function(board){
+  return(paste0(as.numeric(board),collapse = ''))
+}
+
+#' Decode board from string to matrix
+#'
+#' @param board_encoded
+#'
+#' @return
+#'
+#' @examples
+decode_board <- function(board_encoded){
+  board_v <- as.integer(unlist(strsplit(board_encoded, "")))
+   board <-  matrix(board_v,nrow=2,ncol=8)
+  return(board)
+}
