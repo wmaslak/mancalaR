@@ -12,6 +12,3 @@ check_and_move(player, B_N, B_S, pit_r, pit_c, direction, print_int = F)
 \description{
 Check if starting pit is allowed and perform move.
 }
-\examples{
-
-}

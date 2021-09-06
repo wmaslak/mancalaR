@@ -124,6 +124,7 @@ return(list(N = B_N, S = B_S,
 #' @return \code{list(captured = cap, N = B_N, S= B_S, stones_won = st_won)} Boolean indicating if capture took place, boards of player N and S
 #'   after the capture, number of stones captured. If capture did not take place
 #'   it returns \code{FALSE}
+#' @export
 
 capture_rule <- function(player, B_N, B_S, end_pit_r, end_pit_c){
 
@@ -172,6 +173,7 @@ capture_rule <- function(player, B_N, B_S, end_pit_r, end_pit_c){
 #'
 #'
 #' @examples
+#' @export
 find_posssible_moves <- function(board){
   poss <- which(board > 1,T)
 

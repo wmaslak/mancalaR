@@ -118,8 +118,7 @@ make_move <- function(player,
 #' @param direction
 #' @param print_int
 #'
-#' @examples
-#'
+#' @export
 
 check_and_move <- function(player,
                            B_N,
@@ -168,6 +167,7 @@ check_and_move <- function(player,
 #' @param print_int
 #'
 #' @examples
+#' @export
 check_if_end_game <- function(B_N,B_S, print_int = FALSE){
   # check if any of the players cannot move
   if( !any(B_N>1) ){
@@ -201,6 +201,7 @@ check_if_end_game <- function(B_N,B_S, print_int = FALSE){
 #' @return
 #'
 #' @examples
+#' @export
 init_stats_df <- function(){
 
   #initialize df with statistics and helpers
@@ -252,6 +253,7 @@ parse_move_str <- function(r,c,d){
 #' @param stats_df
 #'
 #' @return
+#' @export
 
 add_move_stats <- function(move,B_N,B_S,
                       r_N,c_N,d_N,
@@ -425,6 +427,7 @@ two_player_mode <- function(B_N,B_S,print_int = FALSE) {
 #' @return
 #'
 #' @examples
+#' @export
 choose_random_move <- function(board){
 
   poss <- find_posssible_moves(board)

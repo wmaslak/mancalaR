@@ -46,8 +46,15 @@ human_player <- function(name, state){
 
 }
 
+#' init state
+#'
+#' @return
+#' @export
+#'
+#' @examples
 init_state <- function(){
 
+  state <- list(B_N = NA, B_S = NA)
   state$B_N <- matrix(c(2, 2, 2, 2, 2, 2, 2, 2,
                         2, 2, 2, 2, 0, 0, 0, 0),
                       nrow = 2,
@@ -104,7 +111,7 @@ Mancala <- R6::R6Class("Mancala",
                       if(is.na(starting_state)){
                         self$state <- self$init_state()
                       }else if(is.list(starting_state)){
-                        state <- starting_state
+                        self$state <- starting_state
                       }
 
                     },
