@@ -285,6 +285,8 @@ add_move_stats <- function(move,B_N,B_S,
 
 }
 
+
+
 #' Two player console mode
 #'
 #' @param print_int
@@ -435,6 +437,8 @@ choose_random_move <- function(board){
   return(c(poss[row,1],poss[row,2],direction))
 }
 
+
+
 #' Two bots
 #'
 #' Each chooses random move out of possible moves until the game ends.
@@ -554,7 +558,6 @@ simulate_mancala <- function(mode = "random_vs_random",gameplay=play_game,n=20){
 
   for (i in 1:n) {
     print(paste0("Playing game ",i))
-
     new_game <- gameplay(mode=mode)
 
     if(tail(new_game,1)$stones_S > tail(new_game,1)$stones_N){

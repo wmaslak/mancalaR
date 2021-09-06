@@ -18,11 +18,12 @@ LinkingTo:
 Imports: 
     stringr,
     magrittr,
-    Rcpp,
     shiny,
     ggplot2,
     dplyr,
     tidyr,
     thematic,
     bslib,
-    pkgload
+    pkgload,
+    Rcpp,
+    R6

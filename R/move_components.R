@@ -1,5 +1,3 @@
-
-
 #' single_sow
 #'
 #' Make a single sowing move, without "compound" sowing
@@ -215,6 +213,7 @@ encode_board <- function(board){
 #' @param board_encoded
 #'
 #' @return
+#'
 #'
 #' @examples
 decode_board <- function(board_encoded){

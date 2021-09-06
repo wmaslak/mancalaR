@@ -5,20 +5,25 @@
 
 using namespace Rcpp;
 
-// timesThree
-NumericVector timesThree(NumericVector x);
-RcppExport SEXP _mancalaR_timesThree(SEXP xSEXP) {
+// single_sow_cpp
+List single_sow_cpp(String player, NumericMatrix B_N, NumericMatrix B_S, int pit_r, int pit_c, int direction);
+RcppExport SEXP _mancalaR_single_sow_cpp(SEXP playerSEXP, SEXP B_NSEXP, SEXP B_SSEXP, SEXP pit_rSEXP, SEXP pit_cSEXP, SEXP directionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(timesThree(x));
+    Rcpp::traits::input_parameter< String >::type player(playerSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type B_N(B_NSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type B_S(B_SSEXP);
+    Rcpp::traits::input_parameter< int >::type pit_r(pit_rSEXP);
+    Rcpp::traits::input_parameter< int >::type pit_c(pit_cSEXP);
+    Rcpp::traits::input_parameter< int >::type direction(directionSEXP);
+    rcpp_result_gen = Rcpp::wrap(single_sow_cpp(player, B_N, B_S, pit_r, pit_c, direction));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_mancalaR_timesThree", (DL_FUNC) &_mancalaR_timesThree, 1},
+    {"_mancalaR_single_sow_cpp", (DL_FUNC) &_mancalaR_single_sow_cpp, 6},
     {NULL, NULL, 0}
 };
 
