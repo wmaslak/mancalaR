@@ -15,7 +15,7 @@ random_bot <- function(name,state){
 #' Human player
 #'
 #' @return move
-#'
+#' @export
 
 human_player <- function(name, state){
   bname <- paste0("B_",name)
@@ -65,7 +65,7 @@ init_state <- function(){
 #' @field player_N,player_S Functions taking the state of the game and
 #' returning the move.
 #' @method play_game Plays game according to rules provided in the \code{new} method
-#'
+#' @exportClass
 
 Mancala <- R6::R6Class("Mancala",
                    public = list(
