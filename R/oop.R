@@ -3,6 +3,7 @@
 #'
 #' @param name name of player
 #' @param state list of boards
+#' @export
 
 random_bot <- function(name,state){
   stopifnot(name == "S" | name == "N")
@@ -65,7 +66,7 @@ init_state <- function(){
 #' @field player_N,player_S Functions taking the state of the game and
 #' returning the move.
 #' @method play_game Plays game according to rules provided in the \code{new} method
-#' @exportClass
+#' @export
 
 Mancala <- R6::R6Class("Mancala",
                    public = list(
