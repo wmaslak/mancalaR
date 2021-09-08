@@ -11,7 +11,9 @@
 #' @param should_end
 #' @param move_length
 #'
-#' @return
+#' @export
+#'
+#' @return state of the game (boards and move length)
 
 make_move <- function(player,
                       B_N,

@@ -21,7 +21,7 @@ make_move(
 \item{move_length}{}
 }
 \value{
-
+state of the game (boards and move length)
 }
 \description{
 make_move
