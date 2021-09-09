@@ -207,6 +207,7 @@ encode_board <- function(board){
 #' @param board_encoded a string of digits representing the HusBao board
 #'
 #' @return a matrix corresponding to the string
+#' @export
 
 decode_board <- function(board_encoded){
   board_v <- as.integer(unlist(strsplit(board_encoded, "")))
