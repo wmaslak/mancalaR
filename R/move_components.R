@@ -182,7 +182,7 @@ find_posssible_moves <- function(board){
 #' @param pit_r row of the chosen pit
 #' @param pit_c column of the chosen pit
 #' @param board board of the player making the move
-#'
+#' @export
 
 check_if_move_possible <- function(pit_r,pit_c,board){
 
