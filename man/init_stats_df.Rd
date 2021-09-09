@@ -7,7 +7,8 @@
 init_stats_df()
 }
 \value{
-
+an empty data frame with columns: move, move_N, move_S, stones_N,
+stones_S, depth, B_N, B_S
 }
 \description{
 Initialize df with game statistics

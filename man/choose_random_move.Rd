@@ -7,10 +7,10 @@
 choose_random_move(board)
 }
 \arguments{
-\item{board}{}
+\item{board}{Board from which we want to draw move}
 }
 \value{
-
+a valid move
 }
 \description{
 Choose random but possible move.

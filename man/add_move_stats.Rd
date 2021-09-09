@@ -19,14 +19,27 @@ add_move_stats(
 )
 }
 \arguments{
-\item{B_N}{board n}
+\item{move}{number of move}
 
-\item{B_S}{board s}
+\item{B_N}{board of player N}
 
-\item{stats_df}{}
-}
-\value{
+\item{B_S}{board of player S}
 
+\item{r_N}{row of N move}
+
+\item{c_N}{column of N move}
+
+\item{d_N}{direction of N move}
+
+\item{r_S}{row of S move}
+
+\item{c_S}{direction of S move}
+
+\item{d_S}{column of S move}
+
+\item{depth}{length of the move (number of single sows)}
+
+\item{stats_df}{the df to which the row should be added}
 }
 \description{
 Add move to stats df

@@ -22,4 +22,5 @@ Imports:
     thematic,
     bslib,
     pkgload,
-    R6
+    R6,
+    utils

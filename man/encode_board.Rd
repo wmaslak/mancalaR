@@ -7,10 +7,10 @@
 encode_board(board)
 }
 \arguments{
-\item{board}{}
+\item{board}{a matrix representing a HusBao board}
 }
 \value{
-
+a string representing the matrix
 }
 \description{
 Encode board from matrix to string

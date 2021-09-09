@@ -1,15 +1,15 @@
 #' make_move
 #'
-#' @param player
-#' @param B_N
-#' @param B_S
-#' @param pit_r
-#' @param pit_c
-#' @param direction
-#' @param can_capture
-#' @param print_int
-#' @param should_end
-#' @param move_length
+#' @param player "N" for north player or "S" for south player
+#' @param B_N board of player N
+#' @param B_S board of player S
+#' @param pit_r row of the chosen starting pit
+#' @param pit_c column of the chosen starting pit
+#' @param direction direction of the move. 1 for clockwise and 0 for counter clockwise
+#' @param can_capture logical. technical argument used in recursive calls. defaults to FALSE
+#' @param print_int logical. choose whether to print verbose debugging communicates
+#' @param should_end logical. technical argument used in recursive calls. defaults to FALSE
+#' @param move_length shows move's depth i.e number of single sowings performed. used for recursive calls
 #'
 #' @export
 #'
@@ -112,13 +112,13 @@ make_move <- function(player,
 
 #' Check if starting pit is allowed and perform move.
 #'
-#' @param player
-#' @param B_N
-#' @param B_S
-#' @param pit_r
-#' @param pit_c
-#' @param direction
-#' @param print_int
+#' @param player "N" for north player or "S" for south player
+#' @param B_N board of player N
+#' @param B_S board of player S
+#' @param pit_r row of the chosen starting pit
+#' @param pit_c column of the chosen starting pit
+#' @param direction direction of the move. 1 for clockwise and 0 for counter clockwise
+#' @param print_int logical. choose whether to print verbose debugging communicates
 #'
 #' @export
 
@@ -164,11 +164,9 @@ check_and_move <- function(player,
 
 #' Check if game should end or continue given boards of players.
 #'
-#' @param B_N
-#' @param B_S
-#' @param print_int
-#'
-#' @examples
+#' @param B_N board of player N
+#' @param B_S board of player S
+#' @param print_int logical. choose whether to print verbose debugging communicates
 #' @export
 check_if_end_game <- function(B_N,B_S, print_int = FALSE){
   # check if any of the players cannot move
@@ -200,9 +198,8 @@ check_if_end_game <- function(B_N,B_S, print_int = FALSE){
 
 #' Initialize df with game statistics
 #'
-#' @return
-#'
-#' @examples
+#' @return an empty data frame with columns: move, move_N, move_S, stones_N,
+#' stones_S, depth, B_N, B_S
 #' @export
 init_stats_df <- function(){
 
@@ -229,9 +226,7 @@ init_stats_df <- function(){
 #' @param d direction
 #'
 #' @return string in the form of "rcd"
-#'
-#'
-#' @examples
+
 parse_move_str <- function(r,c,d){
 
   return(as.character(paste0(r,c,d)))
@@ -241,20 +236,18 @@ parse_move_str <- function(r,c,d){
 
 #' Add move to stats df
 #'
-#' @param B_N board n
-#' @param B_S board s
-#' @param r_N
-#' @param c_N
-#' @param d_N
-#' @param r_S
-#' @param c_S
-#' @param d_S
-#' @param stones_N
-#' @param stones_S
-#' @param depth
-#' @param stats_df
+#' @param move number of move
+#' @param B_N board of player N
+#' @param B_S board of player S
+#' @param r_N row of N move
+#' @param c_N column of N move
+#' @param d_N direction of N move
+#' @param r_S row of S move
+#' @param d_S column of S move
+#' @param c_S direction of S move
+#' @param depth length of the move (number of single sows)
+#' @param stats_df the df to which the row should be added
 #'
-#' @return
 #' @export
 
 add_move_stats <- function(move,B_N,B_S,
@@ -293,14 +286,12 @@ add_move_stats <- function(move,B_N,B_S,
 
 #' Two player console mode
 #'
-#' @param print_int
+#' @param print_int logical. choose whether to print verbose debugging communicates
+#' @param B_N board of player N
+#' @param B_S board of player S
 #'
-#' @return
-#'
-#' @examples
-#'
-#'
-#'
+#' @return dataframe with game statistics
+
 two_player_mode <- function(B_N,B_S,print_int = FALSE) {
 
   stats_df <- init_stats_df()
@@ -424,11 +415,9 @@ two_player_mode <- function(B_N,B_S,print_int = FALSE) {
 
 #' Choose random but possible move.
 #'
-#' @param board
+#' @param board Board from which we want to draw move
 #'
-#' @return
-#'
-#' @examples
+#' @return a valid move
 #' @export
 choose_random_move <- function(board){
 
@@ -448,13 +437,12 @@ choose_random_move <- function(board){
 #'
 #' Each chooses random move out of possible moves until the game ends.
 #'
-#' @param B_N
-#' @param B_S
-#' @param print_int
+#' @param B_N board of player N
+#' @param B_S board of player S
+#' @param print_int logical. choose whether to print verbose debugging communicates
 #'
-#' @return
-#'
-#' @examples
+#' @return dataframe with game statistics
+
 random_vs_random_mode <- function(B_N, B_S, print_int = FALSE){
 
   stats_df <- init_stats_df()
@@ -523,13 +511,10 @@ random_vs_random_mode <- function(B_N, B_S, print_int = FALSE){
 #' Play Mancala in selected mode
 #'
 #' @param mode modes available: \code{two_player} - two players play on the
-#' same machine
-#' @param print_int
-#'
-#' @return
-#'
-#'
-#' @examples
+#' same machine, \code{random_vs_random} - both players choose random but legal
+#' moves
+#' @param print_int logical. choose whether to print verbose debugging communicates
+
 play_game <- function(mode="two_player",print_int=FALSE){
 
 
@@ -557,6 +542,15 @@ play_game <- function(mode="two_player",print_int=FALSE){
 
 
 
+#' Simulate a number of mancala games
+#'
+#' @param mode chosen mode, available the same as in \code{play_mancala}
+#' @param gameplay function that plays a single game
+#' @param n number of times that the game should be played
+#'
+#' @return dataframe consisting of statistics of \code{n} games played
+#' @export
+
 simulate_mancala <- function(mode = "random_vs_random",gameplay=play_game,n=20){
 
   games_df <- data.frame()
@@ -565,11 +559,11 @@ simulate_mancala <- function(mode = "random_vs_random",gameplay=play_game,n=20){
     print(paste0("Playing game ",i))
     new_game <- gameplay(mode=mode)
 
-    if(tail(new_game,1)$stones_S > tail(new_game,1)$stones_N){
+    if(utils::tail(new_game,1)$stones_S > utils::tail(new_game,1)$stones_N){
 
       winner <- "S"
 
-    }else if(tail(new_game,1)$stones_S < tail(new_game,1)$stones_N){
+    }else if(utils::tail(new_game,1)$stones_S < utils::tail(new_game,1)$stones_N){
 
       winner <- "N"
 

@@ -6,9 +6,14 @@
 \usage{
 human_player(name, state)
 }
+\arguments{
+\item{name}{name of the player "N" for north and "S" for south}
+
+\item{state}{state of the game}
+}
 \value{
 move
 }
 \description{
-Human player
+take move from human player and parse it to vector
 }

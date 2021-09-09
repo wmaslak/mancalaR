@@ -11,16 +11,20 @@ An R6 class to represent a mancala game
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{player_N, player_S}}{Functions taking the state of the game and
+\item{\code{players}}{a list of functions taking the state of the game and
 returning the move.}
-}
-\if{html}{\out{</div>}}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{player_N, player_S}}{Functions taking the state of the game and
-returning the move.}
+
+\item{\code{state}}{contains the boards of both players}
+
+\item{\code{stats_df}}{is a dataframe containing statistics of the played game}
+
+\item{\code{active_player}}{the player currently taking the turn}
+
+\item{\code{check_game_end}}{Checker of whether game should end. Function taking state of the game as an input and returning a logical.}
+
+\item{\code{make_move}}{Mechanics of move. Function that takes the state of the game, the player's identifier and a their move and returns state of the game}
+
+\item{\code{init_state}}{Initial state of the game. Function that returns the initial state of the game.}
 }
 \if{html}{\out{</div>}}
 }
@@ -41,7 +45,6 @@ returning the move.}
 \if{html}{\out{<div class="r">}}\preformatted{Mancala$new(
   player_N = mancalaR::human_player,
   player_S = mancalaR::human_player,
-  capture_rule = mancalaR::capture_rule,
   check_game_end = mancalaR::check_if_end_game,
   make_move = mancalaR::check_and_move,
   init_state = mancalaR::init_state,
@@ -49,6 +52,25 @@ returning the move.}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{player_N}}{Mechanics of player N. Function that takes the state of the game as an input and returns a move as a numeric vector.}
+
+\item{\code{player_S}}{Mechanics of player S. Function that takes the state of the game as an input and returns a move as a numeric vector}
+
+\item{\code{check_game_end}}{Checker of whether game should end. Function taking state of the game as an input and returning a logical.}
+
+\item{\code{make_move}}{Mechanics of move. Function that takes the state of the game, the player's identifier and a their move and returns state of the game}
+
+\item{\code{init_state}}{Initial state of the game. Function that returns the initial state of the game.}
+
+\item{\code{starting_state}}{optional. Starting state. A state from which we want to start the game instead of the initial state.
+
+reset state}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-reset_state"></a>}}
@@ -58,6 +80,9 @@ returning the move.}
 \if{html}{\out{<div class="r">}}\preformatted{Mancala$reset_state()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+assigns initial state to the state field
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-play_game"></a>}}
@@ -67,6 +92,13 @@ returning the move.}
 \if{html}{\out{<div class="r">}}\preformatted{Mancala$play_game(print_int = F)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{print_int}}{logical. choose whether to show verbose debugging stuff}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

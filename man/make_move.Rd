@@ -18,7 +18,25 @@ make_move(
 )
 }
 \arguments{
-\item{move_length}{}
+\item{player}{"N" for north player or "S" for south player}
+
+\item{B_N}{board of player N}
+
+\item{B_S}{board of player S}
+
+\item{pit_r}{row of the chosen starting pit}
+
+\item{pit_c}{column of the chosen starting pit}
+
+\item{direction}{direction of the move. 1 for clockwise and 0 for counter clockwise}
+
+\item{should_end}{logical. technical argument used in recursive calls. defaults to FALSE}
+
+\item{can_capture}{logical. technical argument used in recursive calls. defaults to FALSE}
+
+\item{print_int}{logical. choose whether to print verbose debugging communicates}
+
+\item{move_length}{shows move's depth i.e number of single sowings performed. used for recursive calls}
 }
 \value{
 state of the game (boards and move length)

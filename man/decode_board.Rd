@@ -7,10 +7,10 @@
 decode_board(board_encoded)
 }
 \arguments{
-\item{board_encoded}{}
+\item{board_encoded}{a string of digits representing the HusBao board}
 }
 \value{
-
+a matrix corresponding to the string
 }
 \description{
 Decode board from string to matrix

@@ -15,6 +15,11 @@ random_bot <- function(name,state){
 
 #' Human player
 #'
+#' take move from human player and parse it to vector
+#'
+#' @param name name of the player "N" for north and "S" for south
+#' @param state state of the game
+#'
 #' @return move
 #' @export
 
@@ -48,10 +53,9 @@ human_player <- function(name, state){
 
 #' init state
 #'
-#' @return
+#' @return initialize HusBao state (boards)
 #' @export
-#'
-#' @examples
+
 init_state <- function(){
 
   state <- list(B_N = NA, B_S = NA)
@@ -70,9 +74,14 @@ init_state <- function(){
 
 #' An R6 class to represent a mancala game
 #'
-#' @field player_N,player_S Functions taking the state of the game and
+#' @field players a list of functions taking the state of the game and
 #' returning the move.
-#' @method play_game Plays game according to rules provided in the \code{new} method
+#' @field state contains the boards of both players
+#' @field stats_df is a dataframe containing statistics of the played game
+#' @field active_player the player currently taking the turn
+#' @field check_game_end Checker of whether game should end. Function taking state of the game as an input and returning a logical.
+#' @field make_move Mechanics of move. Function that takes the state of the game, the player's identifier and a their move and returns state of the game
+#' @field init_state Initial state of the game. Function that returns the initial state of the game.
 #' @export
 
 Mancala <- R6::R6Class("Mancala",
@@ -82,11 +91,26 @@ Mancala <- R6::R6Class("Mancala",
                     state    = NA,
                     stats_df = NA,
                     active_player = NA,
+                    ## game mechanics to be provided
+                    check_game_end = NA,
+                    make_move      = NA,
+                    init_state     = NA,
+
                     # methods
                     ## technical
+
+
+#' @param player_N Mechanics of player N. Function that takes the state of the game as an input and returns a move as a numeric vector.
+#' @param player_S Mechanics of player S. Function that takes the state of the game as an input and returns a move as a numeric vector
+#' @param check_game_end Checker of whether game should end. Function taking state of the game as an input and returning a logical.
+#' @param make_move Mechanics of move. Function that takes the state of the game, the player's identifier and a their move and returns state of the game
+#' @param init_state Initial state of the game. Function that returns the initial state of the game.
+#' @param starting_state optional. Starting state. A state from which we want to start the game instead of the initial state.
+#'
+
+
                     initialize =  function(player_N = mancalaR::human_player,
                                            player_S = mancalaR::human_player,
-                                           capture_rule = mancalaR::capture_rule,
                                            check_game_end = mancalaR::check_if_end_game,
                                            make_move = mancalaR::check_and_move,
                                            init_state = mancalaR::init_state,
@@ -94,7 +118,6 @@ Mancala <- R6::R6Class("Mancala",
                       # check args
                       stopifnot(class(player_N)=="function"&
                                 class(player_S)=="function"&
-                                class(capture_rule)=="function"&
                                 class(check_game_end)=="function"&
                                 class(make_move)=="function" &
                                 class(init_state)=="function"
@@ -103,7 +126,6 @@ Mancala <- R6::R6Class("Mancala",
                       # assign fields their values
                       self$players$N <- player_N
                       self$players$S <- player_S
-                      self$capture_rule <-  capture_rule
                       self$check_game_end <-check_game_end
                       self$make_move <- make_move
                       self$init_state <- init_state
@@ -115,16 +137,17 @@ Mancala <- R6::R6Class("Mancala",
                       }
 
                     },
+#' reset state
+#'
+#' @return assigns initial state to the state field
+
                     reset_state = function(){
                       self$state <- self$init_state()
                     },
-                    ## game mechanics to be provided
-                    capture_rule   = NA,
-                    check_move_end = NA,
-                    check_game_end = NA,
-                    make_move      = NA,
-                    init_state     = NA,
+
                     ## game mechanics that are universal
+
+#' @param print_int logical. choose whether to show verbose debugging stuff
                     play_game = function(print_int = F){
 
                       self$active_player <- sample(c("S","N"),1)

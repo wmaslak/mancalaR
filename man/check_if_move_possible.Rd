@@ -7,14 +7,12 @@
 check_if_move_possible(pit_r, pit_c, board)
 }
 \arguments{
-\item{board}{}
-}
-\value{
+\item{pit_r}{row of the chosen pit}
 
+\item{pit_c}{column of the chosen pit}
+
+\item{board}{board of the player making the move}
 }
 \description{
 Check if provided move is possible
-}
-\examples{
-
 }

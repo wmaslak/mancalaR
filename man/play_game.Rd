@@ -8,12 +8,10 @@ play_game(mode = "two_player", print_int = FALSE)
 }
 \arguments{
 \item{mode}{modes available: \code{two_player} - two players play on the
-same machine}
+same machine, \code{random_vs_random} - both players choose random but legal
+moves}
 
-\item{print_int}{}
-}
-\value{
-
+\item{print_int}{logical. choose whether to print verbose debugging communicates}
 }
 \description{
 Play Mancala in selected mode

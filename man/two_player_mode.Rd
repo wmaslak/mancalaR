@@ -7,16 +7,15 @@
 two_player_mode(B_N, B_S, print_int = FALSE)
 }
 \arguments{
-\item{print_int}{}
+\item{B_N}{board of player N}
+
+\item{B_S}{board of player S}
+
+\item{print_int}{logical. choose whether to print verbose debugging communicates}
 }
 \value{
-
+dataframe with game statistics
 }
 \description{
 Two player console mode
-}
-\examples{
-
-
-
 }

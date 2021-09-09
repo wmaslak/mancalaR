@@ -7,10 +7,10 @@
 find_posssible_moves(board)
 }
 \arguments{
-\item{board}{}
+\item{board}{board which we want to find moves from}
 }
 \value{
-Matrix which contains coordinates of possible starting pits.
+Named matrix which contains coordinates of possible starting pits.
 }
 \description{
 Find coordinates of possible starting pits.

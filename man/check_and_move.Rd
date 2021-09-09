@@ -7,7 +7,19 @@
 check_and_move(player, B_N, B_S, pit_r, pit_c, direction, print_int = F)
 }
 \arguments{
-\item{print_int}{}
+\item{player}{"N" for north player or "S" for south player}
+
+\item{B_N}{board of player N}
+
+\item{B_S}{board of player S}
+
+\item{pit_r}{row of the chosen starting pit}
+
+\item{pit_c}{column of the chosen starting pit}
+
+\item{direction}{direction of the move. 1 for clockwise and 0 for counter clockwise}
+
+\item{print_int}{logical. choose whether to print verbose debugging communicates}
 }
 \description{
 Check if starting pit is allowed and perform move.

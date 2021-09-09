@@ -167,12 +167,9 @@ capture_rule <- function(player, B_N, B_S, end_pit_r, end_pit_c){
 #' You can move from a pit if ic contains at least 2 stones.
 #'
 #'
-#' @param board
+#' @param board board which we want to find moves from
 #'
-#' @return Matrix which contains coordinates of possible starting pits.
-#'
-#'
-#' @examples
+#' @return Named matrix which contains coordinates of possible starting pits.
 #' @export
 find_posssible_moves <- function(board){
   poss <- which(board > 1,T)
@@ -182,14 +179,11 @@ find_posssible_moves <- function(board){
 
 #' Check if provided move is possible
 #'
-#' @param pit_r
-#' @param pit_c
-#' @param board
+#' @param pit_r row of the chosen pit
+#' @param pit_c column of the chosen pit
+#' @param board board of the player making the move
 #'
-#' @return
-#'
-#' @examples
-#'
+
 check_if_move_possible <- function(pit_r,pit_c,board){
 
   poss_moves <- find_posssible_moves(board)
@@ -201,23 +195,19 @@ check_if_move_possible <- function(pit_r,pit_c,board){
 
 #' Encode board from matrix to string
 #'
-#' @param board
+#' @param board a matrix representing a HusBao board
 #'
-#' @return
-#'
-#' @examples
+#' @return a string representing the matrix
 encode_board <- function(board){
   return(paste0(as.numeric(board),collapse = ''))
 }
 
 #' Decode board from string to matrix
 #'
-#' @param board_encoded
+#' @param board_encoded a string of digits representing the HusBao board
 #'
-#' @return
-#'
-#'
-#' @examples
+#' @return a matrix corresponding to the string
+
 decode_board <- function(board_encoded){
   board_v <- as.integer(unlist(strsplit(board_encoded, "")))
    board <-  matrix(board_v,nrow=2,ncol=8)

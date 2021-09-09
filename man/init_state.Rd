@@ -7,7 +7,7 @@
 init_state()
 }
 \value{
-
+initialize HusBao state (boards)
 }
 \description{
 init state
